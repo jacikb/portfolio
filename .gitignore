@@ -16,7 +16,8 @@
 /vendor/
 /web/bundles/
 /src/AppBundle/*
-/src/AppBundle/Entity/Article.php
-/src/AppBundle/Entity/User.php
-/src/AppBundle/Entity/Section.php
+!/src/AppBundle/Entity
+!/src/AppBundle/Entity/Article.php
+!/src/AppBundle/Entity/User.php
+!/src/AppBundle/Entity/Section.php
 /app/Resources/views/*
