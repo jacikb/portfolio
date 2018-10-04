@@ -17,6 +17,8 @@
 /web/bundles/
 /src/AppBundle/*
 !/src/AppBundle/Entity
+/src/AppBundle/Entity/Auc*
+/src/AppBundle/Entity/Off*
 !/src/AppBundle/Entity/Article.php
 !/src/AppBundle/Entity/User.php
 !/src/AppBundle/Entity/Section.php
