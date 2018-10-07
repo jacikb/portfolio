@@ -52,6 +52,13 @@ class Article
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank(message = "Tytuł nie może być pusty")
+     * @Assert\Length(
+     *      min=3,
+     *      max=60,
+     *      minMessage="Tytuł nie może byc krótszy niż 5 znaków!",
+     *      maxMessage="Tytuł nie może być dłuższy niż 60 znaków!"
+     * )
      */
     private $title;
 
@@ -59,6 +66,10 @@ class Article
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\Length(
+     *      min=5,
+     *      minMessage="Treść nie może być krótsza niż 20 znaków!"
+     * )
      */
     private $content;
 
@@ -66,6 +77,7 @@ class Article
      * @var string
      *
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     *
      */
     private $link;
 
@@ -80,15 +92,17 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="createAt", type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $createAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="midifiedAt", type="datetime")
+     * @ORM\Column(name="updatedAt", type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
-    private $midifiedAt;
+    private $updatedAt;
 
 
     /**
@@ -296,27 +310,27 @@ class Article
     }
 
     /**
-     * Set midifiedAt
+     * Set updatedAt
      *
-     * @param \DateTime $midifiedAt
+     * @param \DateTime $updatedAt
      *
      * @return Article
      */
-    public function setMidifiedAt($midifiedAt)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->midifiedAt = $midifiedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get midifiedAt
+     * Get updatedAt
      *
      * @return \DateTime
      */
-    public function getMidifiedAt()
+    public function getUpdatedAt()
     {
-        return $this->midifiedAt;
+        return $this->updatedAt;
     }
 
 

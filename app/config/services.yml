@@ -44,9 +44,9 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-    #AppBundle\Service\DateService\:
-    #    public: true;
-    #    synthetic: true;
+    AppBundle\Service\DateService\:
+        public: true;
+        synthetic: true;
 
 
 
