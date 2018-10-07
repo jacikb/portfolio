@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+
+<div class="row">
+
+
+    {% for article in articles %}
+        <div class="col-md-4">
+        <div class="panel panel-default shadow" >
+            <div class="panel-heading">
+                <div class="panel-title ">
+                    <b>{{ article.title }}</b>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="box panel-text">
+                    {{ article.content | raw}}
+                </div>
+                <p><a class="btn btn-secondary btn-light pull-right" href="" role="button">Chcesz wiedzieć więcej?</a></p>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+ </div>
+
+
+
+
+
+
+
+{% endblock %}

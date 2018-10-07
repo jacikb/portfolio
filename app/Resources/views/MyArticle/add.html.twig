@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>Dodawanie</h3></div>
+        <div class="panel-body">
+            {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
+        </div>
+    </div>
+{% endblock %}
