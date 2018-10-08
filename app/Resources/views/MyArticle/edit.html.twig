@@ -2,7 +2,14 @@
 
 {% block body %}
     <div class="panel panel-default">
-        <div class="panel-heading"><h3>Edycja #{{ form.vars.value.id }}</h3></div>
+        <div class="panel-heading">
+            <h3>Edycja #{{ form.vars.value.id }}
+                {{ form_start(deleteForm, {"attr": {"class": "pull-right"}}) }} {# rozpoczecie form #}
+                {{ form_widget(deleteForm.submit, {"attr": {"class": "btn-danger"}}) }} {# konkretn pole#}
+                {{ form_rest(deleteForm) }} {#generowanie dodatkowego pola z metodą i tokenem CSRF   dorzuca wszystko co nie zostalo wyrendeerowane INPUT-y#}
+                {{ form_end(deleteForm) }} {# zamykamy form #}
+            </h3>
+        </div>
         <div class="panel-body">
             {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
             {{ form(deleteForm ) }}
