@@ -28,9 +28,11 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                 "SELECT a
                  FROM AppBundle:Article a
                  WHERE a.status = :status
+                 AND a.owner = :owner
                  ORDER BY a.section ASC"
             )
             ->setParameter("status", Article::STATUS_PUBLIC)
+            ->setParameter("owner", Article::EXPOSE_OWNER_ID)
             ->getResult();
     }
 

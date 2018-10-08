@@ -7,23 +7,35 @@
 
     {% for article in articles %}
         <div class="col-md-4">
-        <div class="panel panel-default shadow" >
-            <div class="panel-heading">
-                <div class="panel-title ">
-                    <b>{{ article.title }}</b>
-                    <a href="{{ url("article_edit", {"id": article.id}) }}">
-                        <span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span>
-                    </a>
+            <div class="panel panel-default shadow" >
+                <div class="panel-heading">
+                    <div class="panel-title ">
+                        <b>{{ article.title }}</b>
+                        <a href="{{ url("article_edit", {"id": article.id}) }}">
+                            <span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
-                <div class="box panel-text">
-                {{ article.content | raw }}
-                </div>
-                {#<p><a class="btn btn-secondary btn-light pull-right" href="" role="button">Chcesz wiedzieć więcej?</a></p>#}
+                <div class="panel-body">
+                    <div class="box panel-text">
+                    {{ article.content | raw }}
+                    </div>
 
+
+
+                </div>
+                {% if article.file|trim|length > 0 %}
+                    <div class="panel-footer">
+                        <p>
+                            <a
+                                    class="pull-right"
+                                    href="{{ asset('/pub/' ~ article.file) }}"
+                                    download>{{ article.file }}
+                            </a>
+                        </p>
+                    </div>
+                {% endif %}
             </div>
-        </div>
         </div>
     {% endfor %}
  </div>
