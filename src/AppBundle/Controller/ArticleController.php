@@ -30,7 +30,6 @@ class ArticleController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         $articles = $entityManager->getRepository(Article::class)->findAll();
-
         $route = $entityManager->getRepository(Section::class)->getSectionRoute();
 
         return $this->render("Article/index.html.twig", ["articles" => $articles, "route"=>$route]);
@@ -108,7 +107,7 @@ class ArticleController extends Controller
 
 
     /**
-     * @Route("/article/edit/{id}", name="article_edit")
+     * @Route("/article/edit/{id}", name="article_edit" )
      * @param Request $request
      * @param Auction $auction
      * @return Response
@@ -126,15 +125,43 @@ class ArticleController extends Controller
 
 
             $entityManager = $this->getDoctrine()->getManager();//pobiera menadzera
-            $entityManager->persist($article);//ma zapisac do bazy
-            $entityManager->flush();//fizyznie zapisuje do bazy
-
-            //$this->get("event_dispatcher")->dispatch(Events::AUCTION_EDIT, new AuctionEvent($auction));
+            $entityManager->persist($article);
+            $entityManager->flush();
 
             $this->addFlash("success","Zapisano zmiany w artykule: {$article->getTitle()}.");
             return $this->redirectToRoute("my_article_index");
         }
-        return $this->render("MyArticle/edit.html.twig", ["form" => $form->createView(),"id" => $article->getId() ]);
+        else
+        {
+            $deleteForm = $this->createFormBuilder()
+                ->setAction($this->generateUrl("article_delete",["id" => $article->getId()]))
+                ->setMethod(Request::METHOD_DELETE)
+                ->add("submit", SubmitType::class, ["label" => "Usuń"])
+            ->getForm();
+
+        }
+        return $this->render("MyArticle/edit.html.twig", ["form" => $form->createView(),"deleteForm" => $deleteForm->createView(),"id" => $article->getId() ]);
+    }
+
+    /**
+     * @Route("/article/delete/{id}", name="article_delete", methods={"DELETE"})
+     * @param Articlew $article
+     * @return Response
+     */
+    public function deleteAction(Article $article)
+    {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+        if($this->getUser() !== $article->getOwner()) {
+            throw new AccessDeniedException;
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();//pobiera menadzera
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        $this->addFlash("success","Artykuł {$article->getTitle()} został usunięty.");
+
+        return $this->redirectToRoute("article_index");
     }
 
     /**

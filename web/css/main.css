@@ -81,8 +81,8 @@ body{
     .switch {
         display: block;
         position: absolute;
-        top: 25px;
-        right: 20px;
+        top: 30px;
+        right: 25px;
         border: 1px dotted;
     }
     .nav {

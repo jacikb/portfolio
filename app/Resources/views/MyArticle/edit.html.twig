@@ -5,6 +5,7 @@
         <div class="panel-heading"><h3>Edycja #{{ form.vars.value.id }}</h3></div>
         <div class="panel-body">
             {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
+            {{ form(deleteForm ) }}
         </div>
     </div>
 {% endblock %}
