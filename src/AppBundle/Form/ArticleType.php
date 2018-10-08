@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
@@ -29,9 +30,11 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add("title", TextType::class, ["label" => "Tytuł"])
-            ->add('section', EntityType::class, array(
-                'class' => Section::class,
-                'choice_label' => 'name',
+            ->add('status', ChoiceType::class, array(
+                'choices'  => array(
+                    'Public' => Article::STATUS_PUBLIC,
+                    'Private' => Article::STATUS_PRIVATE,
+                )
             ))
             ->add('content', CKEditorType::class, array(
                 'config' => array(
