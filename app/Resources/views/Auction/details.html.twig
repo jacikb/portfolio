@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="panel {{ auctionStyle(auction.expiresAt) }}">
+        <div class="panel-heading">
+            <h4>{{ auction.title }}</h4>
+        </div>
+        <div class="panel-body">
+            <p>{{ auction.description }}</p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">Cena: {{ auction.price }} zł</li>
+            <li class="list-group-item">Cena wywoławcza: {{ auction.startingPrice }} zł</li>
+            <li class="list-group-item">Aukcja kończy się: {{ auction.expiresAt | expireDate }} </li>
+        </ul>
+    </div>
+
+    </br>
+
+    <div class="panel panel-default">
+        <ul class="list-group">
+            {% for offer in auction.offers %}
+                <li class="list-group-item">Ofrta {{ offer.price }} zł, złożona {{ offer.createdAt | date("Y-m-d H:i:s")  }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if is_granted("ROLE_USER") %}
+        <div class="panel panel-success">
+            <div class="panel-body">
+                {{ form_start(buyForm, {"attr": {"class": "pull-left", "style": "padding-right:10px;"}}) }} {# rozpoczecie form #}
+                    {{ form_widget(buyForm.submit, {"attr": {"class": "btn-success"}}) }} {# konkretn pole#}
+                    {{ form_rest(buyForm) }} {#generowanie dodatkowego pola z metodą i tokenem CSRF   dorzuca wszystko co nie zostalo wyrendeerowane INPUT-y#}
+                {{ form_end(buyForm) }} {# zamykamy form #}
+
+                <div class="input-group">
+                    {{ form_start(bidForm, {"attr": { "novalidate": "novalidate", "class": "pull-left"}}) }}
+                        <div class="input-group">
+                            {{ form_widget(bidForm.price) }}
+                            <span class="input-group-btn">
+                                {{ form_widget(bidForm.submit) }}
+                            </span>
+                        </div>
+                        {{ form_rest(bidForm) }}
+                    {{ form_end(bidForm) }}
+                </div>
+                <div class="clearfix"></div>{# poniewaz uzywalismy pull-left#}
+            </div>
+        </div>
+    {% endif %}
+
+
+     <a class="btn btn-secondary" href="{{ url('auction_index') }}">Powrót</a>
+
+        {# mozna taka ale z otoczka div
+            {{ form(deleteForm) }}
+            {{ form(finishForm) }}
+        #}
+
+    {# <div class="clearfix"></div> #}
+
+    {% if not is_granted("ROLE_USER") %}
+        <h3>Licytacja możliwa po zalogowaniu</h3>
+    {% endif %}
+
+{% endblock %}

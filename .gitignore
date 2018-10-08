@@ -16,7 +16,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/src/AppBundle/*
-!/src/AppBundle/Entity
 /APSTART.bath
 /INFO.txt
