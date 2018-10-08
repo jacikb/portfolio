@@ -16,6 +16,7 @@ use AppBundle\Entity\Section;
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     * @param User $owner
      * @return mixed
      */
     public function findMyOrdered(User $owner)
@@ -31,7 +32,9 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter("owner", $owner)
             ->getResult();
     }
+
     /**
+     * @param Section $section
      * @return mixed
      */
     public function findArticleBySection(Section $section)

@@ -23,6 +23,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ArticleType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -42,9 +46,11 @@ class ArticleType extends AbstractType
             ->add("submit", SubmitType::class, ["label" => "Zapisz"]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(["data_class" => Article::class]);
     }
-
 }
