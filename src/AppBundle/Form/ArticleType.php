@@ -35,7 +35,8 @@ class ArticleType extends AbstractType
             ))
             ->add('content', CKEditorType::class, array(
                 'config' => array(
-                    'uiColor' => '#ffffff',
+                    'toolbar' => 'standard',
+                    'uiColor' => '#f5f5f5',
                 ),
             ))
             ->add("link", TextType::class, ["label" => "Link"])

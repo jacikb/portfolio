@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $articles = $entityManager->getRepository(Article::class)->findAll();
+        $articles = $entityManager->getRepository(Article::class)->findPublicOrdered();
         $route = $entityManager->getRepository(Section::class)->getSectionRoute();
 
         return $this->render("Article/index.html.twig", ["articles" => $articles, "route"=>$route]);
@@ -57,7 +57,7 @@ class ArticleController extends Controller
 
 
     /**
-     * @Route("/add", name="my_article_add")
+     * @Route("/add", name="article_add")
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return Response
      */

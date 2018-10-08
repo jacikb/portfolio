@@ -15,6 +15,25 @@ use AppBundle\Entity\Section;
 
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+    /**
+     * @return mixed
+     */
+    public function findPublicOrdered()
+    {
+        return $this
+            ->getEntityManager()
+            ->createQuery(
+                "SELECT a
+                 FROM AppBundle:Article a
+                 WHERE a.status = :status
+                 ORDER BY a.section ASC"
+            )
+            ->setParameter("status", Article::STATUS_PUBLIC)
+            ->getResult();
+    }
+
     /**
      * @param User $owner
      * @return mixed
