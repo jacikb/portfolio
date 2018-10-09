@@ -21,20 +21,16 @@
                     {{ article.content | raw }}
                     </div>
 
-
-
                 </div>
-                {% if article.file|trim|length > 0 %}
-                    <div class="panel-footer">
-                        <p>
-                            <a
-                                    class="pull-right"
-                                    href="{{ asset('/pub/' ~ article.file) }}"
-                                    download>{{ article.file }}
-                            </a>
-                        </p>
-                    </div>
-                {% endif %}
+                <div class="panel-footer" style="padding-bottom:25px;">
+                    {% if article.file|trim|length > 0 %}
+
+                        <a class="pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
+                            {{ article.file }}
+                        </a>
+
+                    {% endif %}
+                </div>
             </div>
         </div>
     {% endfor %}

@@ -70,35 +70,19 @@ class ArticleController extends Controller
 
         if($request->isMethod("post")) {
             $form->handleRequest($request);
-/*
-            if($auction->getStartingPrice() >= $auction->getPrice()){
-                //po dodaniu addError  isValid wykryj błąd
-                $form
-                    ->get("startingPrice")
-                    ->addError(
-                        new FormError("Cena początkowa nie może być większa od ceny kup teraz")
-                    );
-
-            }
-            */
 
 
             if($form->isValid()){
                 $article
                     ->setStatus(Article::STATUS_PUBLIC)
                     ->setOwner($this->getUser());
-                //->setCreatedAt(new \DateTime())
-                //->setUpdatedAt(new \DateTime())
 
-                $entityManager = $this->getDoctrine()->getManager();//pobiera menadzera
-                $entityManager->persist($article);//ma zapisac do bazy
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($article);
                 $entityManager->flush();
 
-                //$this->get("event_dispatcher")->dispatch(Events::AUCTION_ADD, new AuctionEvent($auction));
+                $this->addFlash("success","Artykuł {$article->getTitle()} został dodany.");
 
-                $this->addFlash("success","Artykuł {$article->getTitle()} został dodany.");//success typ
-
-                //return $this->redirectToRoute("my_article_index", ["id"=> $auction->getId()]);
             }
             $this->addFlash("error", "Nie udało się dodac artykułu");
         }
@@ -123,8 +107,7 @@ class ArticleController extends Controller
         if($request->isMethod("post")) {
             $form->handleRequest($request);
 
-
-            $entityManager = $this->getDoctrine()->getManager();//pobiera menadzera
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -155,7 +138,7 @@ class ArticleController extends Controller
             throw new AccessDeniedException;
         }
 
-        $entityManager = $this->getDoctrine()->getManager();//pobiera menadzera
+        $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($article);
         $entityManager->flush();
 

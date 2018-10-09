@@ -16,7 +16,6 @@ class Article
 {
     const STATUS_PUBLIC = "public";
     const STATUS_PRIVATE = "private";
-    const STATUS_DELETE = "delete";
 
     const EXPOSE_OWNER_ID = 1;
 

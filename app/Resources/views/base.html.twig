@@ -2,15 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome on portfolio Jacek Brzeziński!{% endblock %}</title>
+        <meta name="keywords" content="php, symfony, cakephp, delphi ">
+        <meta name="description" content="Programista symfony, Programista php, Portfolio Jacek Brzeziński">
+        <title>{% block title %}Portfolio Jacek Brzeziński!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('vendor/bootstrap/dist/css/bootstrap.my.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
             <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
-
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -58,6 +58,15 @@
                             });
                 });
             </script>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127169172-1"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'UA-127169172-1');
+            </script>
+
         {% endblock %}
     </body>
 </html>
