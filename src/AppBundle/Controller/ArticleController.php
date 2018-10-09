@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Section;
+use AppBundle\Entity\User;
 use AppBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -157,5 +158,17 @@ class ArticleController extends Controller
         $articles = $entityManager->getRepository(Article::class)->findArticleBySection($section);
         return $this->render("Article/index.html.twig", ["articles" => $articles]);
 
+    }
+
+    /**
+     * @Route("/user/{username}", name="article_user")
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function userAction(User $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $articles = $entityManager->getRepository(Article::class)->findMyOrdered($user);
+        return $this->render("MyArticle/index.html.twig", ["articles" => $articles]);
     }
 }
