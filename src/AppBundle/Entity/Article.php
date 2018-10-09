@@ -42,6 +42,12 @@ class Article
     private $status;
 
     /**
+     * @var pdf
+     * @ORM\Column(name="pdf", type="boolean", nullable=true)
+     */
+    private $pdf;
+
+    /**
      * @var int
      * @ORM\ManyToOne(targetEntity="Section", inversedBy="articles")
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
@@ -164,6 +170,29 @@ class Article
         return $this->status;
     }
 
+    /**
+     * Set pdf
+     *
+     * @param boolean $pdf
+     *
+     * @return boolean
+     */
+    public function setPdf($pdf)
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    /**
+     * Get pdf
+     *
+     * @return boolean
+     */
+    public function getPdf()
+    {
+        return $this->pdf;
+    }
 
     /**
      * Set section

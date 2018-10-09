@@ -22,17 +22,14 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findPublicOrdered()
     {
-        return $this
-            ->getEntityManager()
-            ->createQuery(
-                "SELECT a
-                 FROM AppBundle:Article a
-                 WHERE a.status = :status
-                 AND a.owner = :owner
-                 ORDER BY a.section ASC"
-            )
-            ->setParameter("status", Article::STATUS_PUBLIC)
+
+        return $this->createQueryBuilder("a")
+            ->where("a.status = :public")
+            ->setParameter("public", Article::STATUS_PUBLIC)
+            ->andWhere("a.owner = :owner")
             ->setParameter("owner", Article::EXPOSE_OWNER_ID)
+            ->orderBy("a.section", "ASC")
+            ->getQuery()
             ->getResult();
     }
 
@@ -42,15 +39,12 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findMyOrdered(User $owner)
     {
-        return $this
-            ->getEntityManager()
-            ->createQuery(
-                "SELECT a
-                 FROM AppBundle:Article a
-                 WHERE a.owner = :owner
-                 ORDER BY a.updatedAt ASC"
-            )
-            ->setParameter("owner", $owner)
+
+        return $this->createQueryBuilder("a")
+            ->Where("a.owner = :owner")
+            ->setParameter("owner", Article::EXPOSE_OWNER_ID)
+            ->orderBy("a.section", "ASC")
+            ->getQuery()
             ->getResult();
     }
 
@@ -60,15 +54,11 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findArticleBySection(Section $section)
     {
-        return $this
-            ->getEntityManager()
-            ->createQuery(
-                "SELECT a
-                 FROM AppBundle:Article a
-                 WHERE a.section = :section
-                 ORDER BY a.updatedAt ASC"
-            )
+        return $this->createQueryBuilder("a")
+            ->Where("a.section = :section")
             ->setParameter("section", $section)
+            ->orderBy("a.updatedAt", "ASC")
+            ->getQuery()
             ->getResult();
     }
 }

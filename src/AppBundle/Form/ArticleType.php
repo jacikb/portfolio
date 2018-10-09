@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
@@ -42,10 +43,11 @@ class ArticleType extends AbstractType
                     'uiColor' => '#f5f5f5',
                 ),
             ))
+            ->add("pdf", CheckboxType::class, ["label" => "Export to PDF"])
             ->add("link", TextType::class, ["label" => "Link"])
             ->add("file", TextType::class, ["label" => "Plik"])
 
-            ->add("submit", SubmitType::class, ["label" => "Zapisz"]);
+            ->add("submit", SubmitType::class, ["label" => "Zapisz", "attr" => ["class" => "pull-right"]]);
     }
 
     /**
