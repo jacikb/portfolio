@@ -44,9 +44,14 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-    AppBundle\Service\DateService\:
-        public: true;
-        synthetic: true;
 
+
+    AppBundle\Service\ArticleService:
+        public: true;
+        arguments: [ "@doctrine.orm.entity_manager" ]
+        tags: ['controller.service_arguments', 'form.builder', 'request']
+
+    #app.article_controller:
+    #    class: AppBundle\Controller\ArticleController
 
 

@@ -10,7 +10,7 @@
             <div class="panel panel-default shadow" >
                 <div class="panel-heading">
                     <div class="panel-title ">
-                        <b>{{ article.title }}</b>
+                        <b>{{ article.title }} #{{ article.id }}</b>
                         <a href="{{ url("article_edit", {"id": article.id}) }}">
                             <span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span>
                         </a>
@@ -20,21 +20,19 @@
                     <div class="box panel-text">
                     {{ article.content | raw }}
                     </div>
-
                 </div>
                 <div class="panel-footer" style="padding-bottom:25px;">
+                    <span>#{{ article.id }}</span>
                     {% if article.file|trim|length > 0 %}
-
                         <a class="pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
                             {{ article.file }}
                         </a>
-
                     {% endif %}
                 </div>
             </div>
         </div>
     {%  else %}
-        {{ include('emptyArticleIndex.html.twig') }}
+        {{ include('emptyArticleIndex.html.twig',{ 'article': article}) }}
     {% endfor %}
  </div>
 

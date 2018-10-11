@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Section;
+use Doctrine\ORM\EntityManager;
 
 /**
  * ArticleRepository
@@ -42,7 +43,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         return $this->createQueryBuilder("a")
             ->Where("a.owner = :owner")
-            ->setParameter("owner", Article::EXPOSE_OWNER_ID)
+            ->setParameter("owner", $owner)
             ->orderBy("a.section", "ASC")
             ->getQuery()
             ->getResult();
@@ -60,5 +61,43 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->orderBy("a.updatedAt", "ASC")
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param Article $article
+     * @param EntityManager $em
+     * @return $this
+     */
+    public function addArticle(Article $article, EntityManager $em)
+    {
+
+
+        //$article = $this->em->getRepository(Article::class);
+        $article
+            ->setStatus(Article::STATUS_PUBLIC)
+            ->setOwner($this->getUser());
+
+        $em->persist($article);
+        $em->flush();
+
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return $this
+     */
+    public function createX(Article $article )
+    {
+
+        //$article = $this->em->getRepository(Article::class);
+        $article
+            ->setStatus(Article::STATUS_PUBLIC)
+            ->setOwner($this->getUser());
+
+        $em->persist($article);
+        $em->flush();
+
+        return $this;
     }
 }

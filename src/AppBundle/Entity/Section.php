@@ -108,14 +108,14 @@ class Section
      */
     public function getArticles()
     {
-        return $this->articls;
+        return $this->articles;
     }
 
     /**
      * @param Article $article
      * @return $this
      */
-    public function setArticls(Article $article)
+    public function setArticles(Article $article)
     {
         $this->articles[] = $article;
 
