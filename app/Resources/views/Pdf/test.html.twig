@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="php, symfony, cakephp, delphi ">
+    <meta name="description" content="Programista symfony, Programista php, Portfolio Jacek Brzeziński">
+    <title>{% block title %}Portfolio Jacek Brzeziński!{% endblock %}</title>
+    {% block stylesheets %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% endblock %}
+
+</head>
+<body>
+    <div >
+        <h2 style="text-align: center;">Test Pdf</h2>
+        {% for article in articles %}
+                        <h3>{{ article.title }}</h3>
+                        {{ article.content | raw}}
+        {% endfor %}
+    </div>
+</body>
+</html>>

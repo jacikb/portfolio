@@ -19,6 +19,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+//PDF
+use Symfony\Component\HttpFoundation\Response;
+
+
+
 class ArticleController extends Controller
 {
 
@@ -149,6 +154,32 @@ class ArticleController extends Controller
         $articles = $articleService->getUserArticle($user);
 
         return $this->render("MyArticle/index.html.twig", ["articles" => $articles]);
+    }
+
+    /**
+     * @Route("/pdf", name="pdf_test")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function pdfTestAction(ArticleService $articleService)
+    {
+        $articles = $articleService->getPublicArticles();
+
+        $snappy = $this->get("knp_snappy.pdf");
+        $html = $this->renderView('Pdf/test.html.twig', array(
+            'title' => 'Test pdf',
+            "articles" => $articles,
+        ));
+        
+        $file_name = "test_pdf";
+
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $file_name  . '.pdf"',
+            )
+        );
     }
 
 }

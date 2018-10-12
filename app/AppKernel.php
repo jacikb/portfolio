@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
         ];
 
