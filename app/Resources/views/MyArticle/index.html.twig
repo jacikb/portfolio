@@ -9,19 +9,16 @@
 
     {% for article in articles %}
         <div class="col-md-4">
-            <div class="panel panel-default shadow" >
+            <div class="panel panel-default shadow"  >
                 <div class="panel-heading">
-                    <div class="panel-title ">
-                        <b>{{ article.title }} #{{ article.id }}</b>
+
+                        <b>{{ article.title }} &nbsp; (#{{ article.id }})</b>
                         <a href="{{ url("article_edit", {"id": article.id}) }}">
                             <span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span>
                         </a>
-                    </div>
                 </div>
-                <div class="panel-body">
-                    <div id="c_{{ article.id }}" class="box panel-text efect" style="display:none;">
+                <div class="panel-body box"  id="b_{{ article.id }}">
                     {{ article.content | raw }}
-                    </div>
                 </div>
                 <div class="panel-footer" style="padding-bottom:25px;">
                     <span>#{{ article.id }}</span>
