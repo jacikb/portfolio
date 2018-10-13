@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="panel panel-default shadow">
-    <div class="panel-heading"><h3>Rejestracja</h3></div>
+        <div class="panel-heading"><h3>{% set current_route = app.request.get('_route') %}{{ current_route|trans }}</h3></div>
         <div class="panel-body">
             {% block fos_user_content %}
             {% endblock fos_user_content %}

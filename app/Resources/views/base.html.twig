@@ -15,7 +15,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-
+{{ pathToWeb }}
         <div class="container" style="margin-top: 15px">
             {% if is_granted("ROLE_USER") %}
                 {% include("menuAuthenticated.html.twig") %}
@@ -50,7 +50,12 @@
 
 
         {% block javascripts %}
+            <script>
+                var c_1="jakis przykladowy tekst do zmiany";
+
+            </script>
             <script src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
             <script>
                 $(document).ready(function (){
                             $('.switch').click(function(){
