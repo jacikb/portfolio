@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .doc-title {
     text-align: center;
 }
@@ -8,4 +9,16 @@
 }
 .art-content {
     margin-left: 40px;
+=======
+.doc-title {
+    text-align: center;
+}
+.art-title {
+    color: #000;
+    background-color:#888;
+    padding:5px;
+}
+.art-content {
+    margin-left: 40px;
+>>>>>>> 8e271d3cf4e8ad276868f3b207823c441c349c6a
 }
