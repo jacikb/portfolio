@@ -1,0 +1,11 @@
+.doc-title {
+    text-align: center;
+}
+.art-title {
+    color: #000;
+    background-color:#888;
+    padding:5px;
+}
+.art-content {
+    margin-left: 40px;
+}

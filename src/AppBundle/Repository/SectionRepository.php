@@ -17,13 +17,14 @@ class SectionRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getSectionRoute()
     {
-    return $this
-        ->getEntityManager()
-        ->createQuery(
-            "SELECT a
-             FROM AppBundle:Section a
-            ORDER BY a.id ASC"
-        )
-        ->getResult();
+
+        return $this
+            ->getEntityManager()
+            ->createQuery(
+                "SELECT a
+                 FROM AppBundle:Section a
+                ORDER BY a.id ASC"
+            )
+            ->getResult();
     }
 }

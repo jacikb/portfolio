@@ -34,6 +34,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+
     /**
      * @param User $owner
      * @return mixed

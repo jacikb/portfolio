@@ -1,10 +1,10 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{%  trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <h3>Witaj {{ user.username }} !</h3>
-    <p>Jeśli chcesz dodać artykuł wejdź pod ten <a href="{{ url('my_article_add') }}">link</a></p>
+    <h3>Witaj {{ user.firstName }} {{ user.lastName }} !</h3>
+    <p>Jeśli chcesz dodać artykuł wejdź pod ten <a href="{{ url('article_add') }}">link</a></p>
     <p>Jeśli chcesz zobaczyć swoje artykuły wejdź pod ten <a href="{{ url('my_article_index') }}">link</a></p>
     {% if targetUrl %}
         <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>

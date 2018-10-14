@@ -177,15 +177,7 @@ class ArticleService extends AbstractServiceConfigurator
             ->findMyOrdered($owner);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSectionsRoute()
-    {
 
-        return $this->em->getRepository(Section::class)
-            ->getSectionRoute();
-    }
 
     /**
      * @return mixed

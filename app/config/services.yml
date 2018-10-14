@@ -51,7 +51,14 @@ services:
         arguments: [ "@doctrine.orm.entity_manager" ]
         tags: ['controller.service_arguments', 'form.builder', 'request']
 
-    #app.article_controller:
-    #    class: AppBundle\Controller\ArticleController
+    AppBundle\Service\RouteService:
+        public: true;
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
+
+
+    app.form.registration:
+      class: AppBundle\Form\RegistrationType
+      tags:
+       - { name: form.type, alias: app_user_registration }
 
