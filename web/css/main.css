@@ -27,6 +27,11 @@ body{
     text-decoration: none;
     color:#444;
 }
+.logo-symf {
+    position: absolute;
+    top: 20px;
+    right: -60px;
+}
 .nav_bg {
     background-color: #f5f5f5;
 }
@@ -103,6 +108,9 @@ body{
     .nav li {
         display: block;
         width: 100%;
+    }
+    .logo-symf {
+        display: none;
     }
     .switch {
         display: block;

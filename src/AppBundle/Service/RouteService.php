@@ -5,6 +5,7 @@
  * Date: 14.10.18
  * Time: 17:13
  * To change this template use File | Settings | File Templates.
+ * Generatour rutingu na podstawie tabli Section
  */
 
 namespace AppBundle\Service;
@@ -24,8 +25,9 @@ class RouteService extends AbstractServiceConfigurator{
     }
 
     /**
-     * @return \Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator|void
+     * @return Section|array
      */
+
     public function getList()
     {
         return $this->em->getRepository(Section::class)

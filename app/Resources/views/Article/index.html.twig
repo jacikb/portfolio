@@ -8,23 +8,19 @@
 
 
     {% for article in articles %}
-        <div class="col-md-4">
+        <div class="col-md-4" id="a{{ article.id }}" style="top:1300px; opacity: 0.2;">
             <div class="panel panel-default shadow" >
                 <div class="panel-heading">
-
                         <b>{{ article.title }}</b>
-
                 </div>
-                <div id="c_{{ article.id }}" class="panel-body box">
+                <div  class="panel-body box">
                         {{ article.content | raw}}
-
                 </div>
                 <div class="panel-footer">
                     {% if article.file|trim|length > 0 %}
                         <a class="foo-link pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
                             {{ article.file }}
                         </a>
-
                     {% endif %}
                 </div>
 
