@@ -17,10 +17,7 @@ use AppBundle\Service\RouteService;
 use AppBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-//PDF
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -97,10 +94,6 @@ class ArticleController extends Controller
             throw new AccessDeniedException;
 
 
-        if($this->getUser() !== $article->getOwner()) {
-            throw new AccessDeniedException;
-        }
-
         $form = $articleService->handlerequest($article);
 
         if($articleService->isPost()){
@@ -137,7 +130,7 @@ class ArticleController extends Controller
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
 
-        if($this->getUser() !== $article->getOwner()) {
+        if($article->isAuthor($this->getUser()) == false){
             throw new AccessDeniedException;
         }
 
