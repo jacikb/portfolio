@@ -3,6 +3,26 @@ body{
     font-family: 'Raleway', sans-serif !important;
 
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
 #logo h3 a {
     text-decoration: none;
     color:#444;
@@ -37,10 +57,14 @@ body{
 }
 .box {
     height:200px;
-    overflow: hidden;
+    overflow-x:auto;
 }
 .shadow {
     box-shadow: 10px 10px #333;
+}
+.foo-link {
+    top: -10px;
+    position: relative;
 }
 
 /* -----------MENU SWITCH -----------*/

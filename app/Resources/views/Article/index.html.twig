@@ -19,10 +19,9 @@
                         {{ article.content | raw}}
 
                 </div>
-                <div class="panel-footer" style="padding-bottom:25px;">
+                <div class="panel-footer">
                     {% if article.file|trim|length > 0 %}
-
-                        <a class="pull-right" href="{{ asset("/web/pub/" ~ article.file) }}" download >
+                        <a class="foo-link pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
                             {{ article.file }}
                         </a>
 
@@ -35,11 +34,6 @@
         {{ include('emptyArticleIndex.html.twig') }}
     {% endfor %}
  </div>
-
-
-
-
-
 
 
 {% endblock %}
