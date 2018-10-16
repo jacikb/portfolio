@@ -3,16 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Text
  *
- * @ORM\Table(name="text")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TextRepository")
+ * @ORM\Table(name="article_item")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleItemRepository")
  */
-class Text
+class ArticleItem
 {
     /**
      * @var int
@@ -26,7 +27,7 @@ class Text
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="texts")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="artItems")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $article;
@@ -89,6 +90,8 @@ class Text
     private $updatedAt;
 
 
+
+
     /**
      * Get id.
      *
@@ -104,7 +107,25 @@ class Text
      *
      * @param int $article
      *
-     * @return Text
+     * @return ArticleItem
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+
+
+
+
+    /**
+     * Set article
+     *
+     * @param integer $owner
+     *
+     * @return ArticleItem
      */
     public function setArticle($article)
     {
@@ -114,21 +135,23 @@ class Text
     }
 
     /**
-     * Get article.
+     * Get article
      *
-     * @return Article
+     * @return int
      */
     public function getArticle()
     {
         return $this->article;
     }
 
+
+
     /**
      * Set status.
      *
      * @param string $status
      *
-     * @return Text
+     * @return ArticleItem
      */
     public function setStatus($status)
     {
@@ -152,7 +175,7 @@ class Text
      *
      * @param string $title
      *
-     * @return Text
+     * @return ArticleItem
      */
     public function setTitle($title)
     {
@@ -176,7 +199,7 @@ class Text
      *
      * @param string $content
      *
-     * @return Text
+     * @return ArticleItem
      */
     public function setContent($content)
     {
@@ -200,7 +223,7 @@ class Text
      *
      * @param int $sort
      *
-     * @return Text
+     * @return ArticleItem
      */
     public function setSort($sort)
     {
@@ -249,7 +272,7 @@ class Text
      *
      * @param \DateTime $updatedAt
      *
-     * @return Text
+     * @return ArticleItem
      */
     public function setUpdatedAt($updatedAt)
     {

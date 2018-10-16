@@ -40,10 +40,22 @@ class Section
 
 
     /**
-     * @var Article[]
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="article")
+     * @var Article[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="section")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
      */
     private $articles;
+
+
+    /**
+     * User constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->articles = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -106,7 +118,7 @@ class Section
     /**
      * @return Article[]|ArrayCollection
      */
-    public function getArticles()
+    public function getArticle()
     {
         return $this->articles;
     }

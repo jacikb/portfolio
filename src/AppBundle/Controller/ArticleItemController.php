@@ -11,21 +11,25 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\ArticleItem;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Section;
 use Symfony\Component\HttpFoundation\Request;
 
 
 
 
-class TextController extends Controller
+class ArticleItemController extends Controller
 {
     /**
-     * @Route("/text/index/{id}", name="text_index")
+     * @Route("/article/item/{id}", name="item_index")
      * @return Response
      */
     public function indexAction(Article $article)
     {
+        if($article->isAuthor($this->getUser()) == false)
+            throw new AccessDeniedException;
 
-        return $this->render("Text/textList.html.twig");
+        return $this->render("MyArticle/itemList.html.twig", ["article" => $article]);
     }
 }
