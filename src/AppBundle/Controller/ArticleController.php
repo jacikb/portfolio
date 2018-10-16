@@ -13,13 +13,11 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Section;
 use AppBundle\Entity\User;
 use AppBundle\Service\ArticleService;
+use AppBundle\Service\RouteService;
 use AppBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-//PDF
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -31,10 +29,11 @@ class ArticleController extends Controller
      * @Route("/", name="article_index")
      * @return Response
      */
-    public function indexAction(ArticleService $articleService)
+    public function indexAction(ArticleService $articleService, RouteService $routeService)
     {
 
-        $route = $articleService->getSectionsRoute();
+        $route = $routeService->getList();
+
         $articles = $articleService->getPublicArticles();
 
         return $this->render("Article/index.html.twig", ["articles" => $articles, "route"=>$route]);
@@ -45,11 +44,12 @@ class ArticleController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function myAction(ArticleService $articleService )
+    public function myAction(ArticleService $articleService, RouteService $routeService)
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
 
-        $route = $articleService->getSectionsRoute();
+        $route = $routeService->getList();
+
         $articles = $articleService->getMyArticles();
 
         return $this->render("MyArticle/index.html.twig", ["articles" => $articles, "route"=>$route]);
@@ -68,7 +68,6 @@ class ArticleController extends Controller
         if($articleService->isPost()){
             if($articleService->isValid()){
                 $articleService->saveArticle();
-
                 $this->addFlash("success","Artykuł  został dodany.");
 
                 return $this->redirectToRoute('my_article_index');
@@ -91,9 +90,9 @@ class ArticleController extends Controller
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
 
-        if($this->getUser() !== $article->getOwner()) {
+        if($article->isAuthor($this->getUser()) == false)
             throw new AccessDeniedException;
-        }
+
 
         $form = $articleService->handlerequest($article);
 
@@ -135,7 +134,7 @@ class ArticleController extends Controller
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
 
-        if($this->getUser() !== $article->getOwner()) {
+        if($article->isAuthor($this->getUser()) == false){
             throw new AccessDeniedException;
         }
 

@@ -14,7 +14,8 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
+/web/pub/
 /vendor/
 /web/bundles/
 /INFO.txt
-/START.bat
+/start.bat

@@ -362,7 +362,14 @@ class Article
         return $this->updatedAt;
     }
 
-
+    /**
+     * @param null $user
+     * @return bool
+     */
+    public function isAuthor($user = null)
+    {
+        return ($user && $user == $this->getOwner());
+    }
 
 
 

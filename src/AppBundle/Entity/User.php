@@ -59,6 +59,15 @@ class User extends BaseUser
     private $articles;
 
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\NotBlank(message="Proszę wgrać plik jpg.")
+     * @Assert\File(mimeTypes={ "application/jpeg" })
+     */
+    private $avatar;
+
+
 
     /**
      * User constructor
@@ -141,6 +150,26 @@ class User extends BaseUser
     public function addArticles(Article $article)
     {
         $this->articles[] = $article;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param $avatar
+     * @return $this
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
         return $this;
     }
 
