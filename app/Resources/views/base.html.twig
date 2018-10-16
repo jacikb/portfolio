@@ -15,7 +15,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-{{ pathToWeb }}
+    {#{{ pathToWeb }}#}
         <div class="container" style="margin-top: 15px">
             {% if is_granted("ROLE_USER") %}
                 {% include("menuAuthenticated.html.twig") %}
@@ -64,9 +64,17 @@
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-
                 gtag('config', 'UA-127169172-1');
             </script>
+            {% if articles is defined %}
+
+            <script>
+                var articles =[{% for article in articles %}{{- "\"a#{article.id}\","|raw -}}{% endfor %} ];
+                $( document ).ready(function() {
+                   Animate(0);
+                });
+            </script>
+            {% endif %}
 
         {% endblock %}
     </body>

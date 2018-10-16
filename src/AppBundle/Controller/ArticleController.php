@@ -118,7 +118,11 @@ class ArticleController extends Controller
                 ->getForm();
         }
 
-        return $this->render("MyArticle/edit.html.twig", ["form" => $form->createView(),"deleteForm" => $deleteForm->createView(),"id" => $article->getId() ]);
+        return $this->render("MyArticle/edit.html.twig", [
+            "form" => $form->createView(),
+            "deleteForm" => $deleteForm->createView(),
+            "id" => $article->getId(),
+        ]);
     }
 
 

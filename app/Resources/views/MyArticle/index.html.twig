@@ -8,7 +8,7 @@
 
 
     {% for article in articles %}
-        <div class="col-md-4">
+        <div class="col-md-4" id="a{{ article.id }}" style="top:1300px; opacity: 0.2;">
             <div class="panel panel-default shadow"  >
                 <div class="panel-heading">
 
@@ -17,13 +17,12 @@
                             <span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span>
                         </a>
                 </div>
-                <div class="panel-body box"  id="b_{{ article.id }}">
+                <div class="panel-body box"  id="b_{{ article.id }}" >
                     {{ article.content | raw }}
                 </div>
-                <div class="panel-footer" style="padding-bottom:25px;">
-                    <span>#{{ article.id }}</span>
+                <div class="panel-footer">
                     {% if article.file|trim|length > 0 %}
-                        <a class="pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
+                        <a class="foo-link pull-right" href="{{ asset("/pub/" ~ article.file) }}" download >
                             {{ article.file }}
                         </a>
                     {% endif %}
