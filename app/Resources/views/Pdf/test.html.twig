@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,30 +20,4 @@
     {%  else %}
         {{ include('emptyArticleIndex.html.twig',{ 'article': article}) }}
     {% endfor %}
-
-=======
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="keywords" content="php, symfony, cakephp, delphi ">
-    <meta name="description" content="Programista symfony, Programista php, Portfolio Jacek Brzeziński">
-    <title>{% block title %}Portfolio Jacek Brzeziński!{% endblock %}</title>
-    <link rel="stylesheet" href="{{ pathToWeb }}/css/pdf.css" />
-</head>
-<body>
-
-<h2 class="doc-title">Test Pdf generator</h2>
-    {% for article in articles %}
-        {% if article.pdf %}
-            <h3 class="art-title" >{{ article.title }}</h3>
-            <div class="art-content">
-                {{ article.content | raw }}
-            </div>
-        {% endif %}
-    {%  else %}
-        {{ include('emptyArticleIndex.html.twig',{ 'article': article}) }}
-    {% endfor %}
-
->>>>>>> 8e271d3cf4e8ad276868f3b207823c441c349c6a
 </body>

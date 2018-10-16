@@ -18,7 +18,7 @@ use AppBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;//Render
 
 
 
@@ -115,11 +115,19 @@ class ArticleController extends Controller
                 ->setMethod(Request::METHOD_DELETE)
                 ->add("submit", SubmitType::class, ["label" => "Usuń"])
                 ->getForm();
+
+            /** Do przeniesienia do serwisu */
+            $textForm = $this->createFormBuilder()
+                ->setAction($this->generateUrl("text_index",["id" => $article->getId()]))
+                ->setMethod(Request::METHOD_POST)
+                ->add("submit", SubmitType::class, ["label" => "Text"])
+                ->getForm();
         }
 
         return $this->render("MyArticle/edit.html.twig", [
             "form" => $form->createView(),
             "deleteForm" => $deleteForm->createView(),
+            "textForm" => $textForm->createView(),
             "id" => $article->getId(),
         ]);
     }

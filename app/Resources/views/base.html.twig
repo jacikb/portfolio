@@ -67,13 +67,7 @@
                 gtag('config', 'UA-127169172-1');
             </script>
             {% if articles is defined %}
-
-            <script>
-                var articles =[{% for article in articles %}{{- "\"a#{article.id}\","|raw -}}{% endfor %} ];
-                $( document ).ready(function() {
-                   Animate(0);
-                });
-            </script>
+                {% include("animate.html.twig") %}
             {% endif %}
 
         {% endblock %}
