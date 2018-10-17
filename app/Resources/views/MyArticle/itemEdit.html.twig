@@ -1,10 +1,12 @@
-
+<div id="item{{ item.id }}">
     <div class="panel panel-default">
         <div class="panel-heading">
-    <h3>{{ item.title }}</h3>
+    <h3>{{ item.title }}
+        <button type="button" class="btn btn-secondary pull-right" onclick="AjaxItemShow('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
+    </h3>
         </div>
         <div class="panel-body">
-            {{ dump(items) }}
+            {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
         </div>
     </div>
-
+</div>

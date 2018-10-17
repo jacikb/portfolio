@@ -10,11 +10,9 @@ $( document ).ready(function() {
 
 function AjaxItemEdit(u, id)
 {
-
-    //$("#button.ajax").click( function(){
     $.ajax({
         url: u,
-        type: "POST",
+        type: "GET",
         dataType: "html",
         data: {
             "id": "id"
@@ -22,13 +20,23 @@ function AjaxItemEdit(u, id)
         async: true,
         success: function (data)
         {
-            console.log(data)
-            $('div#item'+id).html(data);
-
+            $('#item'+id).html(data);
         }
     });
-    //return false;
-
-    //});
-
+}
+function AjaxItemShow(u, id)
+{
+    $.ajax({
+        url: u,
+        type: "GET",
+        dataType: "html",
+        data: {
+            "id": "id"
+        },
+        async: true,
+        success: function (data)
+        {
+            $('#item'+id).html(data);
+        }
+    });
 }

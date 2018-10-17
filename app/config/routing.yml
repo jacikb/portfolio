@@ -4,7 +4,7 @@ app:
 fos_user:
         resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-app_bundle_route:
-   path:     /ajax_request
-   defaults: { _controller: AppBundle:ArticleItem:edit }
+#app_bundle_route:
+   #path:     /ajax_request
+   #defaults: { _controller: AppBundle:ArticleItem:edit }
 

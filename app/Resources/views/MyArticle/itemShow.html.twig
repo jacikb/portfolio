@@ -1,17 +1,13 @@
 <div id="item{{ item.id }}">
     <div class="panel panel-info" >
         <div class="panel-heading">
-    <h3>{{ item.title }}
-
-            <button type="button" class="btn btn-secondary pull-right" onclick="AjaxItemEdit('{{ url('item_edit', {'id': item.id}) }}',{{ item.id }}); return false;">Edit</button>
-
-
-
-
+    <h3>
+        {{ item.title }}
+        <button type="button" class="btn btn-secondary pull-right" onclick="AjaxItemEdit('{{ url('item_edit', {'id': item.id}) }}',{{ item.id }}); return false;">Edit</button>
     </h3>
         </div>
         <div class="panel-body">
-            {{ dump(item) }}
+            {{ item.content|raw }}
         </div>
     </div>
 </div>
