@@ -36,6 +36,20 @@ class Article
     private $owner;
 
     /**
+     * @var int
+     * @ORM\ManyToOne(targetEntity="Section", inversedBy="articles")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     */
+    private $section;
+
+    /**
+     * @var articlesItem[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="ArticleItem", mappedBy="article")
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     */
+    private $articleItems;
+
+    /**
      * @var string
      * @ORM\Column(name="status", type="string", length=20)
      */
@@ -47,12 +61,7 @@ class Article
      */
     private $pdf;
 
-    /**
-     * @var int
-     * @ORM\ManyToOne(targetEntity="Section", inversedBy="articles")
-     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
-     */
-    private $section;
+
 
     /**
      * @var string
@@ -111,6 +120,17 @@ class Article
     private $updatedAt;
 
 
+
+
+    /**
+     * User constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->articleItems = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -143,6 +163,32 @@ class Article
     public function getOwner()
     {
         return $this->owner;
+    }
+
+
+
+    /**
+     * Set section
+     *
+     * @param integer $section
+     *
+     * @return Article
+     */
+    public function setSection($section)
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+     * Get section
+     *
+     * @return int
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 
 
@@ -194,29 +240,7 @@ class Article
         return $this->pdf;
     }
 
-    /**
-     * Set section
-     *
-     * @param integer $section
-     *
-     * @return Article
-     */
-    public function setSection($section)
-    {
-        $this->section = $section;
 
-        return $this;
-    }
-
-    /**
-     * Get section
-     *
-     * @return int
-     */
-    public function getSection()
-    {
-        return $this->section;
-    }
 
     /**
      * Set title
@@ -371,6 +395,25 @@ class Article
         return ($user && $user == $this->getOwner());
     }
 
+    /**
+     * @return ArticleItems[]|ArrayCollection
+     */
+    public function getArticleItems()
+    {
+        return $this->articleItems;
+    }
+
+    /**
+     * @param ArticleItem $articleItem
+     *
+     * @return $this
+     */
+    public function addArticleItems(ArticleItem $articleItem)
+    {
+        $this->articleItems[] = $articleItem;
+
+        return $this;
+    }
 
 
 }

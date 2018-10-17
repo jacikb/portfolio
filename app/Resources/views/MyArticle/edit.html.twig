@@ -8,11 +8,19 @@
                 {{ form_widget(deleteForm.submit, {"attr": {"class": "btn-danger"}}) }}
                 {{ form_rest(deleteForm) }}
                 {{ form_end(deleteForm) }}
+
+                {{ form_start(itemForm, {"attr": {"class": "pull-right"}}) }}
+                {{ form_widget(itemForm.submit, {"attr": {"class": "btn", "style": "margin-right: 20px"}}) }}
+                {{ form_rest(itemForm) }}
+                {{ form_end(itemForm) }}
+
             </h3>
         </div>
         <div class="panel-body">
             {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
-            {{ form(deleteForm ) }}
+            {# form(deleteForm ) #}
         </div>
+        {{ dump(article) }}
     </div>
+
 {% endblock %}

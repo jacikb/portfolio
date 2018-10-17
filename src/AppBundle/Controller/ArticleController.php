@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Article;
+use AppBundle\Entity\ArticleItem;
 use AppBundle\Entity\Section;
 use AppBundle\Entity\User;
 use AppBundle\Service\ArticleService;
@@ -115,9 +116,22 @@ class ArticleController extends Controller
                 ->setMethod(Request::METHOD_DELETE)
                 ->add("submit", SubmitType::class, ["label" => "Usuń"])
                 ->getForm();
+
+            /** Do przeniesienia do serwisu */
+            $itemForm = $this->createFormBuilder()
+                ->setAction($this->generateUrl("item_index",["id" => $article->getId()]))
+                ->setMethod(Request::METHOD_POST)
+                ->add("submit", SubmitType::class, ["label" => "Lista"])
+                ->getForm();
         }
 
-        return $this->render("MyArticle/edit.html.twig", ["form" => $form->createView(),"deleteForm" => $deleteForm->createView(),"id" => $article->getId() ]);
+        return $this->render("MyArticle/edit.html.twig", [
+            "form" => $form->createView(),
+            "deleteForm" => $deleteForm->createView(),
+            "itemForm" => $itemForm->createView(),
+            "id" => $article->getId(),
+            "article" => $article,//for dump var
+        ]);
     }
 
 
@@ -140,6 +154,7 @@ class ArticleController extends Controller
 
         return $this->redirectToRoute("article_index");
     }
+
 
     /**
      * @Route("/user/{username}", name="article_user")

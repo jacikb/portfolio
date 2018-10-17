@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>{{ article.owner.firstName }} {{ article.owner.lastName }}/ {{ article.title }}
+
+            </h3>
+        </div>
+        <div class="panel-body">
+        {% for item in items %}
+            {% include 'MyArticle/itemShow.html.twig' with {"item": item} %}
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

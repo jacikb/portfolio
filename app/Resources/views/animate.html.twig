@@ -1,0 +1,18 @@
+<script>
+
+    var articles =[{% for article in articles %}{{- "\"a#{article.id}\","|raw -}}{% endfor %} ];
+    Animate(0);
+
+    function Animate(index)
+    {
+        if(typeof articles == 'undefined' ) return ;
+        if(index < articles.length) {
+            $("#"+articles[index]).animate({top: "0px", opacity: "0.6"}, 200).promise().done(
+                function(){
+                    $("#"+articles[index]).animate({top: "0px", opacity: "1"}, 300);
+                    Animate(++index);
+                }
+            );
+        }
+    }
+</script>
