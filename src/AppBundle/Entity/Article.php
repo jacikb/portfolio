@@ -47,7 +47,7 @@ class Article
      * @ORM\OneToMany(targetEntity="ArticleItem", mappedBy="article")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
-    private $artItems;
+    private $articleItems;
 
     /**
      * @var string
@@ -128,7 +128,7 @@ class Article
     public function __construct()
     {
         parent::__construct();
-        $this->artItems = new ArrayCollection();
+        $this->articleItems = new ArrayCollection();
     }
 
     /**
@@ -396,11 +396,11 @@ class Article
     }
 
     /**
-     * @return ArticleItem[]|ArrayCollection
+     * @return ArticleItems[]|ArrayCollection
      */
-    public function getArticleItem()
+    public function getArticleItems()
     {
-        return $this->artIems;
+        return $this->articleItems;
     }
 
     /**
@@ -408,9 +408,9 @@ class Article
      *
      * @return $this
      */
-    public function addArticleItem(ArticleItem $articleItem)
+    public function addArticleItems(ArticleItem $articleItem)
     {
-        $this->artItems[] = $articleItem;
+        $this->articleItems[] = $articleItem;
 
         return $this;
     }
