@@ -6,6 +6,9 @@
         <li role="presentation"><a href="{{ url("my_article_index") }}">Artuykuły</a></li>
         <li role="presentation"><a href="{{ url("article_add") }}">Dodaj artykuł</a></li>
         <li role="presentation"><a href="{{ url("fos_user_security_logout") }}">Wyloguj się</a></li>
+        {%  if app.environment == 'dev' %}
+            <li role="presentation" class=""><a href="{{ url('pdf') }}" download>Pdf</a></li>
+        {% endif %}
     </ul>
     <button  type="button" class="switch btn btn-default btn-sm" >
         <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>

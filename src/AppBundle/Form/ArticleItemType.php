@@ -48,7 +48,7 @@ class ArticleItemType extends AbstractType
                 ),
                 'label' => 'Treść'
             ))
-            ->add("submit", SubmitType::class, ["label" => "Zapisz", "attr" => ["class" => "pull-right"]]);
+            ->add("submit", SubmitType::class, ["label" => "Zapisz", "attr" => ["class" => "pull-right ajax-submit"]]);
     }
 
     /**

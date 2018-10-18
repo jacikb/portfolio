@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Article;
@@ -37,16 +38,19 @@ class ArticleItemController extends Controller
         return $this->render("MyArticle/itemList.html.twig", ["article" => $article, "items" => $items]);
     }
     /**
-     * @Route("/article/item/edit/{id}", name="item_edit")
+     * @Route("/article/item/edith/{id}", name="item_edith")
      * @return Response
      */
-    public function editAction(ArticleItem $articleItem, Request $request)
+    public function edithAction(ArticleItem $articleItem, Request $request)
     {
 
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+        }
 
         $form = $this->createForm(ArticleItemType::class , $articleItem, array(
-                        "action" => $this->generateUrl("item_edit",["id" => $articleItem->getId()])
-                    ));
+        "action" => $this->generateUrl("item_edit",["id" => $articleItem->getId()])
+    ));
 
 
         if($request->isMethod("post")) {
@@ -67,12 +71,69 @@ class ArticleItemController extends Controller
     }
 
     /**
+     * @Route("/article/item/edit/{id}", name="item_edit")
+     * @return Response
+     */
+    public function editAction(ArticleItem $articleItem, Request $request)
+    {
+
+        if (!$request->isXmlHttpRequest()) {
+            return new JsonResponse(array('message' => 'You can access this only using Ajax!', 'form' => ''), 400);
+        }
+
+
+        $form = $this->createForm(ArticleItemType::class , $articleItem, array(
+                        "action" => $this->generateUrl("item_edit",["id" => $articleItem->getId()]),
+                        "attr" => ["id" => "form" . $articleItem->getId()],
+                    ));
+
+
+        if($request->isMethod("post")) {
+            $form->handleRequest($request);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($articleItem);
+            $entityManager->flush();
+
+            return new JsonResponse(
+                array(
+                    'message' => 'Zmiany zostały zapisane',
+                    'form' => $this->renderView("MyArticle/itemShow.html.twig",
+                        array(
+                            'entity' => $articleItem,
+                            'item' => $articleItem,
+                        ))), 200);
+
+        }
+
+        return new JsonResponse(
+                array(
+                    'message' => 'Tryb eedycji',
+                    'form' => $this->renderView("MyArticle/itemEdit.html.twig",
+                        array(
+                            'entity' => $articleItem,
+                            'form' => $form->createView(),
+                            'item' => $articleItem,
+                        ))), 200);
+    }
+
+    /**
      * @Route("/article/item/show/{id}", name="item_show")
      * @return Response
      */
     public function showAction(ArticleItem $articleItem, Request $request)
     {
 
-        return $this->render("MyArticle/itemShow.html.twig", ["item" => $articleItem]);
+
+        $response = new JsonResponse(
+            array(
+                'message' => 'OK Show',
+                'form' => $this->renderView("MyArticle/itemShow.html.twig",
+                    array(
+                        'entity' => $articleItem,
+                        'item' => $articleItem,
+                    ))), 200);
+
+        return $response;
     }
 }

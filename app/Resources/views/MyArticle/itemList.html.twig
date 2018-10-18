@@ -2,6 +2,12 @@
 
 {% block body %}
 
+    <div  class="alert-center">
+        <div id="message" class="alert alert-success" role="alert">
+            This is a success alert—check it out!
+        </div>
+    </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3>{{ article.owner.firstName }} {{ article.owner.lastName }}/ {{ article.title }}
@@ -10,7 +16,9 @@
         </div>
         <div class="panel-body">
         {% for item in items %}
+            <div id="item{{ item.id }}">
             {% include 'MyArticle/itemShow.html.twig' with {"item": item} %}
+            </div>
         {% endfor %}
         </div>
     </div>

@@ -9,7 +9,9 @@
         <li role="presentation" class=""><a href="{{ url('article_index') }}">Główna strona</a></li>
         <li role="presentation"><a href="{{ url('fos_user_security_login') }}">Zaloguj się</a></li>
         <li role="presentation"><a href="{{ url('fos_user_registration_register') }}">Zarejestruj się</a></li>
-        <li role="presentation" class=""><a href="{{ url('pdf') }}">Pdf</a></li>
+        {%  if app.environment == 'dev' %}
+        <li role="presentation" class=""><a href="{{ url('pdf') }}" download >Pdf</a></li>
+        {% endif %}
     </ul>
     <button  type="button" class="switch btn btn-default btn-sm" >
         <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
