@@ -11,6 +11,7 @@ $( document ).ready(function() {
 
 function AjaxItem(u, id)
 {
+    $("#bt-" + id).replaceWith("<img src='/img/wait.gif' class='pull-right' width='24px' height='24px'></img>");
     $.ajax({
         url: u,
         type: "GET",

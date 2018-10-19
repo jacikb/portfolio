@@ -2,12 +2,12 @@
 <div class="panel panel-default">
     <div class="panel-heading">
 <h3>{{ item.title }}
-    <button type="button" class="btn btn-secondary pull-right" onclick="AjaxItem('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
+    <button type="button" id="bt-{{ item.id }}" class="btn btn-secondary pull-right" onclick="AjaxItem('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
 </h3>
     </div>
     <div class="panel-body">
         {{ form(form, {"attr": {"novalidate": "novalidate"}}) }}
-        <button type="submit" id="xxx" name="article_item[submit]" class="pull-right ajax-submit btn btn-danger" onclick="ajaxFormSubmit({{ item.id }}); return false;">Zapisz</button>
+        <button type="submit"  name="article_item[submit]" class="pull-right ajax-submit btn btn-danger" onclick="ajaxFormSubmit({{ item.id }}); return false;">Zapisz</button>
 
 
 

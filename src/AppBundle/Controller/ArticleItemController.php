@@ -72,7 +72,7 @@ class ArticleItemController extends Controller
 
     /**
      * @Route("/article/item/edit/{id}", name="item_edit")
-     * @return Response
+     * @return Response Json(mssage, form)
      */
     public function editAction(ArticleItem $articleItem, Request $request)
     {
@@ -119,7 +119,7 @@ class ArticleItemController extends Controller
 
     /**
      * @Route("/article/item/show/{id}", name="item_show")
-     * @return Response
+     * @return Response Json
      */
     public function showAction(ArticleItem $articleItem, Request $request)
     {
