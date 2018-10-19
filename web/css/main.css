@@ -3,6 +3,7 @@ body{
     font-family: 'Raleway', sans-serif !important;
 
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -70,6 +71,16 @@ body{
 .foo-link {
     top: -10px;
     position: relative;
+}
+.alert-center {
+    position:absolute;
+    z-index: 500;
+    top:50%;
+    left:50%;
+    margin:-100px 0 0 -100px;
+    width:400;
+    height:auto;
+    _display: none;
 }
 
 /* -----------MENU SWITCH -----------*/

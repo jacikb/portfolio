@@ -52,6 +52,7 @@
         {% block javascripts %}
             <script src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
             <script src="{{ asset('js/main.js') }}"></script>
+            <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
             <script>
                 $(document).ready(function (){
                             $('.switch').click(function(){
@@ -59,15 +60,12 @@
                             });
                 });
             </script>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127169172-1"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'UA-127169172-1');
-            </script>
+            {%  if app.environment != 'dev' %}
+                {% include("Tools/google.html.twig") %}
+            {% endif %}
+
             {% if articles is defined %}
-                {% include("animate.html.twig") %}
+                {% include("Tools/animate.html.twig") %}
             {% endif %}
 
         {% endblock %}

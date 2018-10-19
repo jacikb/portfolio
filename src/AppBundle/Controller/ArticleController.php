@@ -19,7 +19,7 @@ use AppBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Response;//Render
+use Symfony\Component\HttpFoundation\Response;
 
 
 

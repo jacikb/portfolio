@@ -1,21 +1,32 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
+
+    <div  class="alert-center">
+        <div id="message" class="alert alert-success" role="alert" style="opacity: 0;">
+            This is a success alert—check it out!
+        </div>
+    </div>
+
 
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>{{ article.owner.firstName }} {{ article.owner.lastName }}/ {{ article.title }}</h3>
+            <h3>
+                {{ article.owner.firstName }} {{ article.owner.lastName }}/ {{ article.title }}
+            </h3>
         </div>
+
         <div class="panel-body">
-            sfwfgqwerfg
+        {% for item in items %}
+            <div id="item{{ item.id }}">
+            {% include 'MyArticle/itemShow.html.twig' with {"item": item} %}
+            </div>
+        {% endfor %}
+
         </div>
-
-
-
-        {{ dump(article.articleItems) }}
     </div>
+
+{#    {% include('Tools/modal.html.twig') %} #}
 
 {% endblock %}

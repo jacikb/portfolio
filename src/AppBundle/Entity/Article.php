@@ -43,7 +43,7 @@ class Article
     private $section;
 
     /**
-     * @var artItem[]|ArrayCollection
+     * @var articlesItem[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="ArticleItem", mappedBy="article")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
@@ -127,7 +127,7 @@ class Article
      */
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
         $this->articleItems = new ArrayCollection();
     }
 
