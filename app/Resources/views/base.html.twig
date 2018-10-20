@@ -51,8 +51,10 @@
 
         {% block javascripts %}
             <script src="{{ asset('vendor/jquery/dist/jquery.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui.js') }}"></script>
             <script src="{{ asset('js/main.js') }}"></script>
-            <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
+            <script src="{{ asset('js/openDialog.js') }}"></script>
+
             <script>
                 $(document).ready(function (){
                             $('.switch').click(function(){

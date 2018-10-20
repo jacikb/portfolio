@@ -2,14 +2,6 @@
 
 {% block body %}
 
-    <div  class="alert-center">
-        <div id="message" class="alert alert-success" role="alert" style="opacity: 0;">
-            This is a success alert—check it out!
-        </div>
-    </div>
-
-
-
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3>
@@ -27,6 +19,6 @@
         </div>
     </div>
 
-{#    {% include('Tools/modal.html.twig') %} #}
+    {% include('Tools/openDialog.html.twig') %}
 
 {% endblock %}

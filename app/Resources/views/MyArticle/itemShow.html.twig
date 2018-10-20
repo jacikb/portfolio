@@ -2,7 +2,7 @@
     <div class="panel-heading">
 <h3>
     {{ item.title }}
-    <button type="button" id="bt-{{ item.id }}" class="btn btn-secondary pull-right" onclick="AjaxItem('{{ url('item_edit', {'id': item.id}) }}',{{ item.id }}); return false;">Edit</button>
+    <button type="button" id="bt-{{ item.id }}" class="btn btn-secondary pull-right" onclick="ajaxItemEdit('{{ url('item_edit', {'id': item.id}) }}',{{ item.id }}); return false;">Edit</button>
 </h3>
     </div>
     <div class="panel-body">

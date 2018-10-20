@@ -110,7 +110,7 @@ class ArticleItemController extends Controller
 
                 return new JsonResponse(
                     array(
-                        'message' => 'Zmiany zostały zapisane',
+                        'message' => 'ok',
                         'form' => $this->renderView("MyArticle/itemShow.html.twig",
                             array(
                                 'entity' => $articleItem,

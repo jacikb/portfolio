@@ -5,13 +5,12 @@ $( document ).ready(function() {
 
     $(".show").fadeIn(800);
     $(".logo-symf").animate({right: "30px"}, 800);
-
 });
 
 
-function AjaxItem(u, id)
+function ajaxItemEdit(u, id)
 {
-    $("#bt-" + id).replaceWith("<img src='/img/wait.gif' class='pull-right' width='24px' height='24px'></img>");
+    $("#bt-" + id).replaceWith("<img id='bt-" + id+ "' src='/img/wait.gif' class='pull-right' width='24px' height='24px'></img>");
     $.ajax({
         url: u,
         type: "GET",
@@ -19,18 +18,33 @@ function AjaxItem(u, id)
         async: true,
         success: function (data)
         {
-            //$('#item'+id).html(data);
-            $('#message').fadeOut(100, function(){
-                $('#message').html(data.message);
-                $('#message').width("50%");
-                $('#message').height("50%");
-            });
-            $('#message').fadeIn(400).delay(1000).fadeOut(300);
-            $('#item'+id).html(data.form);
-            //$('.modal-body').html(data.form);
-            //$('.modal-body').modal('show');
+            $('.modal-title').html("Edycja");
+            $('.modal-body').html(data.form);
 
-            console.log('msg:' + data.message);
+            dialog.dialog( "open" );
+
+            $("#bt-" + id).replaceWith('<small class="pull-right">( edited... )</small>');
+
+            //console.log('msg:' + data.message);
+        }
+    });
+}
+function ajaxItemShow(u, id)
+{
+
+    $.ajax({
+        url: u,
+        type: "GET",
+        dataType: "json",
+        async: true,
+        success: function (data)
+        {
+            dialog.dialog( "close" );
+
+            $('#item'+id).html(data.form);
+            $('#message').html(data.message);
+
+            //console.log('msg:' + data.message);
         }
     });
 }
@@ -55,20 +69,15 @@ function ajaxFormSubmit(id)
         success: function(data)
             {
                 $('#item'+id).html(data.form);
-                $('#message').fadeOut(100, function(){
-                    $('#message').html(data.message);
-                });
-                $('#message').fadeIn(400).delay(1000).fadeOut(300);
-
+                dialog.dialog( "close" );
             },
         failure: function(errMsg) {
             alert(errMsg);
         }
     });
-
 }
 
-//utility function
+//form utility function
 function getFormData(data) {
 
     var unindexed_array = data;
@@ -76,7 +85,7 @@ function getFormData(data) {
 
     $.map(unindexed_array, function(n, i) {
 
-        //form_name[title] > title
+        //name[key] > key
         str_array = n['name'];
         var name = str_array.substring(str_array.indexOf('[')+1,str_array.indexOf(']'));
 
@@ -85,3 +94,5 @@ function getFormData(data) {
 
     return indexed_array;
 }
+
+
