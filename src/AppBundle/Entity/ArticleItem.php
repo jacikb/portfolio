@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Text
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ArticleItem
 {
+    const STATUS_PUBLIC = "PUB";
+    const STATUS_PRIVARE = "PRV";
     /**
      * @var int
      *
@@ -37,6 +40,12 @@ class ArticleItem
      *
      * @ORM\Column(name="status", type="string", length=3)
      * @Assert\NotBlank(message = "Status musi być wybrany")
+     * @Assert\Length(
+     * min=3,
+     * max=3,
+     * minMessage="Status miso mieć 3 znaki!",
+     * maxMessage="Status miso mieć 3 znaki!"
+     * )
      */
     private $status;
 
@@ -69,9 +78,23 @@ class ArticleItem
     /**
      * @var int
      *
-     * @ORM\Column(name="sort", type="integer")
+     * @ORM\Column(name="sort", type="integer", nullable=true)
      */
     private $sort;
+
+
+
+    /**
+    * doc https://symfony.com/doc/3.4/controller/upload_file.html
+    * @ORM\Column(name="photo", type="string", nullable=true)
+    * @Assert\File(maxSize="10000000")
+    * @Assert\File(mimeTypes={ "application/pdf", "image/png", "image/jpeg" })
+    */
+    private $photo;
+
+
+
+
 
     /**
      * @var \DateTime
@@ -90,6 +113,14 @@ class ArticleItem
     private $updatedAt;
 
 
+    /**
+     * User constructor
+     */
+    public function __construct()
+    {
+        //parent::__construct();
+        $this->sort = 10;
+    }
 
 
     /**
@@ -241,6 +272,31 @@ class ArticleItem
     {
         return $this->sort;
     }
+
+
+    /**
+     * @param $photo
+     * @return ArticleItem
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+        return $this;
+    }
+
+    /**
+     * Get photo1
+     * @return mixed
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+
+
+
+
 
 
     /**

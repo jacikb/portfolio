@@ -14,8 +14,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+//use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,8 +39,8 @@ class ArticleItemType extends AbstractType
             ->add("title", TextType::class, ["label" => "Tytuł"])
             ->add('status', ChoiceType::class, array(
                 'choices'  => array(
-                    'Public' => 'PU',
-                    'Private' => 'PR',
+                    'Public' => ArticleItem::STATUS_PUBLIC,
+                    'Private' => ArticleItem::STATUS_PRIVARE,
                 ),
                 'label' => 'Status'
             ))
@@ -46,13 +48,14 @@ class ArticleItemType extends AbstractType
                 'config' => array(
                     'toolbar' => 'standard',
                     'uiColor' => '#f5f5f5',
-
-
                 ),
                 'label' => 'Treść',
                 'attr' => ["id" => "editor"]
-            ));
-            //->add("submit", SubmitType::class, ["label" => "Zapisz", "attr" => ["class" => "pull-right ajax-submit"]]);
+            ))
+            ->add('photo', FileType::class, array('label' => 'Photo (png, jpeg)'))
+            ->add('sort', NumberType::class, ['label' => "Sort"]);
+
+            //->add("submit", SubmitType::class, ["label" => "Zapisz", "attr" => ["class" => "pull-right"]]);
 
     }
 

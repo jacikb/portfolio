@@ -9,15 +9,17 @@
     </div>
     #}
     <div class="panel-body">
-        {{ form(form, {"attr": {"novalidate": "novalidate"}})}}
+
+        {{ form_start(form, {"attr": {"class": "pull-right", "novalidate": "novalidate"}}) }}
+        {{ form_widget(form) }}
+        {{ form_row(form.photo) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
 
         <button type="submit"  name="article_item[submit]" class="pull-right btn btn-success" onclick="ajaxFormSubmit({{ item.id }}); return false;">Zapisz</button>
 
-        <button role="button" href="#" type="button"  class="pull-right btn btn-default btn-space" onclick="ajaxItemShow('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Zamknij</button>
+        <button role="button" href="#" type="button"  class="btn btn-default btn-space" onclick="ajaxItemShow('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
 
-    </div>
-    <div class="panel-footer">
-        <p id="msg{{ item.id }}"></p>
     </div>
 {#
 </div>

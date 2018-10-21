@@ -2,10 +2,13 @@
 
 {% block body %}
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
         <div class="panel-heading">
             <h3>
-                {{ article.owner.firstName }} {{ article.owner.lastName }}/ {{ article.title }}
+                 {{ article.title }}
+                <button type="button" id="bt-0" class="btn btn-secondary pull-right">
+                    <a href="{{ url('item_add', {'id': article.id}) }}"> Add </a>
+                </button>
             </h3>
         </div>
 
