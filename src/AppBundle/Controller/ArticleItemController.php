@@ -17,7 +17,7 @@ use AppBundle\Entity\ArticleItem;
 //use AppBundle\Entity\Section;
 use AppBundle\Form\ArticleItemType;
 use Symfony\Component\HttpFoundation\Request;
-
+use Psr\Log\LoggerInterface;
 
 
 
@@ -76,8 +76,11 @@ class ArticleItemController extends Controller
      */
     public function editAction(ArticleItem $articleItem, Request $request)
     {
+        $logger = $this->get("logger");
+        $logger->notice("editAction");
 
         if (!$request->isXmlHttpRequest()) {
+            $logger->notice("editAction not json");
             return new JsonResponse(array('message' => 'You can access this only using Ajax!', 'form' => ''), 400);
         }
 
@@ -87,9 +90,12 @@ class ArticleItemController extends Controller
                         "attr" => ["id" => "form" . $articleItem->getId()],
                     ));
 
-
         if($request->isMethod("post")) {
-            $form->handleRequest($request);
+            //$logger->notice("editAction POST REQUEST ".$request->__toString());
+
+            $data = json_decode($request->getContent(), true);
+            $form->submit($data);
+            //$form->handleRequest($request);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($articleItem);
