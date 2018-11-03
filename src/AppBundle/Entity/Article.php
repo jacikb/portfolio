@@ -127,7 +127,7 @@ class Article
      */
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
         $this->articleItems = new ArrayCollection();
     }
 

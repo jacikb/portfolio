@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -15,3 +16,32 @@
 </div>
 
 
+=======
+
+
+    {#
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>{{ item.title }}
+            <button type="button" id="bt-{{ item.id }}" class="btn btn-secondary pull-right" onclick="AjaxItem('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
+        </h3>
+    </div>
+    #}
+    <div class="panel-body">
+
+        {{ form_start(form, {"attr": {"class": "pull-right", "novalidate": "novalidate"}}) }}
+        {{ form_widget(form) }}
+        {{ form_row(form.photo) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+        <button type="submit"  name="article_item[submit]" class="pull-right btn btn-success" onclick="ajaxFormSubmit({{ item.id }}); return false;">Zapisz</button>
+
+        <button role="button" href="#" type="button"  class="btn btn-default btn-space" onclick="ajaxItemShow('{{ url('item_show', {'id': item.id}) }}',{{ item.id }}); return false;">Anuluj</button>
+
+    </div>
+{#
+</div>
+
+#}
+>>>>>>> 12e497d102207e849174ddbf6bd18ae31b45fd3e
