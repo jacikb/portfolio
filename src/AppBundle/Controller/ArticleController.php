@@ -123,12 +123,19 @@ class ArticleController extends Controller
                 ->setMethod(Request::METHOD_POST)
                 ->add("submit", SubmitType::class, ["label" => "Lista"])
                 ->getForm();
+
+            $dataTableForm = $this->createFormBuilder()
+                ->setAction($this->generateUrl("item_list",["id" => $article->getId()]))
+                ->setMethod(Request::METHOD_POST)
+                ->add("submit", SubmitType::class, ["label" => "Lista DT"])
+                ->getForm();
         }
 
         return $this->render("MyArticle/edit.html.twig", [
             "form" => $form->createView(),
             "deleteForm" => $deleteForm->createView(),
             "itemForm" => $itemForm->createView(),
+            "dataTableForm" => $dataTableForm->createView(),
             "id" => $article->getId(),
             "article" => $article,//for dump var
         ]);

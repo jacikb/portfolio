@@ -9,6 +9,11 @@
                 {{ form_rest(deleteForm) }}
                 {{ form_end(deleteForm) }}
 
+                {{ form_start(dataTableForm, {"attr": {"class": "pull-right"}}) }}
+                {{ form_widget(dataTableForm.submit, {"attr": {"class": "btn", "style": "margin-right: 20px"}}) }}
+                {{ form_rest(dataTableForm) }}
+                {{ form_end(dataTableForm) }}
+
                 {{ form_start(itemForm, {"attr": {"class": "pull-right"}}) }}
                 {{ form_widget(itemForm.submit, {"attr": {"class": "btn", "style": "margin-right: 20px"}}) }}
                 {{ form_rest(itemForm) }}

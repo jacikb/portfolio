@@ -23,6 +23,12 @@ use Psr\Log\LoggerInterface;
 
 class ArticleItemController extends Controller
 {
+
+    function getRoute()
+    {
+        return 'list_';
+    }
+
     /**
      * @Route("/article/item/{id}", name="item_index")
      * @return Response
@@ -141,5 +147,17 @@ class ArticleItemController extends Controller
                     ))), 200);
 
         return $response;
+    }
+    /**
+     * @Route("/article/item/list/{id}", name="item_list")
+     * @return Response Json
+     */
+    public function listAction(Article $article, Request $request)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $items = $entityManager->getRepository(ArticleItem::class)->findBy(["article" => $article]);
+
+        return $this->render("MyArticle/itemListDT.html.twig", ["article" => $article, "items" => $items]);
     }
 }
